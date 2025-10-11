@@ -1,7 +1,7 @@
 FROM caddy:2-builder AS builder
 
 RUN xcaddy build \
-    --with github.com/caddy-dns/gcp
+    --with github.com/caddy-dns/googleclouddns
 
 FROM caddy:2-alpine
 
