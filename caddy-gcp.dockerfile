@@ -3,6 +3,7 @@ FROM caddy:2-builder AS builder
 RUN xcaddy build \
     --with github.com/caddy-dns/googleclouddns \
     --with github.com/mholt/caddy-ratelimit \
+    --with github.com/darkweak/storages/badger/caddy \
     --with github.com/caddyserver/cache-handler
 
 FROM caddy:2-alpine
