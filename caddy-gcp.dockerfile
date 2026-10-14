@@ -5,7 +5,10 @@ RUN xcaddy build \
     --with github.com/mholt/caddy-ratelimit \
     --with github.com/darkweak/storages/badger/caddy \
     --with github.com/techknowlogick/certmagic-s3=github.com/polarlightsllc/certmagic-s3@cdc749729efe345d70a85ce3d4654f2454bda73f \
-    --with github.com/caddyserver/cache-handler
+    --with github.com/caddyserver/cache-handler \
+    --with github.com/polarlightsllc/caddy-lb-spread@v0.1.0
+
+RUN /usr/bin/caddy list-modules | grep -x 'http.reverse_proxy.selection_policies.spread'
 
 FROM caddy:2-alpine
 
