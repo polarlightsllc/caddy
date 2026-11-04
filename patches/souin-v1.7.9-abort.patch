@@ -1,0 +1,47 @@
+diff --git a/pkg/middleware/middleware.go b/pkg/middleware/middleware.go
+index 6a4f461..0210eb6 100644
+--- a/pkg/middleware/middleware.go
++++ b/pkg/middleware/middleware.go
+@@ -619,19 +619,18 @@ func (s *SouinBaseHandler) Upstream(
+ 	cachedKey string,
+ 	uri string,
+ 	disableCoalescing bool,
+-) error {
++) (upstreamErr error) {
+ 	s.Configuration.GetLogger().Debug("Request the upstream server")
+ 	prometheus.Increment(prometheus.RequestCounter)
+ 
+-	var recoveredFromErr error = nil
+ 	defer func() {
+-		// In case of "http.ErrAbortHandler" panic,
+-		// prevent singleflight from wrapping it into "singleflight.panicError".
++		// Upstream runs on a goroutine started by ServeHTTP. Return the abort so ServeHTTP can
++		// re-panic it on the request goroutine, where net/http resets the client connection.
+ 		if r := recover(); r != nil {
+ 			err, ok := r.(error)
+ 			// Sometimes, the error is a string.
+ 			if !ok || errors.Is(err, http.ErrAbortHandler) {
+-				recoveredFromErr = http.ErrAbortHandler
++				upstreamErr = http.ErrAbortHandler
+ 			} else {
+ 				panic(err)
+ 			}
+@@ -687,9 +686,6 @@ func (s *SouinBaseHandler) Upstream(
+ 			disableCoalescing: strings.Contains(cacheControl, "private") || customWriter.Header().Get("Set-Cookie") != "",
+ 		}, err
+ 	})
+-	if recoveredFromErr != nil {
+-		panic(recoveredFromErr)
+-	}
+ 	if err != nil {
+ 		return err
+ 	}
+@@ -1268,6 +1264,8 @@ func (s *SouinBaseHandler) ServeHTTP(rw http.ResponseWriter, rq *http.Request, n
+ 		case Upstream50xError:
+ 			_, _ = customWriter.Send()
+ 			return nil
++		case http.ErrAbortHandler:
++			panic(http.ErrAbortHandler)
+ 		}
+ 		return v
+ 	}
