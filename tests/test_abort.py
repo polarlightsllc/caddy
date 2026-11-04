@@ -59,6 +59,8 @@ def fetch(base, path):
 def aborted(base, path):
     try:
         body, _ = fetch(base, path)
+    except urllib.error.HTTPError as error:
+        raise AssertionError(f"abort became a completed HTTP {error.code} response") from error
     except (http.client.HTTPException, urllib.error.URLError, ConnectionError):
         return
     raise AssertionError(f"aborted response completed successfully: {body!r}")

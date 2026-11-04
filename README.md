@@ -7,7 +7,11 @@ existing error channel; only the request goroutine re-panics. An incomplete
 cacheable origin response must not become a successful partial response or a
 cache entry.
 
-Base images are pinned by multi-platform digest and plugins by version/commit.
+Base images use the exact multi-platform digests recorded in `v1.6.0`'s build
+provenance, preserving its runtime OS layers as well as its compiler. Plugins
+are pinned by version/commit. The current-upstream fix is proposed in
+[Souin PR #896](https://github.com/darkweak/souin/pull/896); this image intentionally
+retains the deployed `v1.7.9` rather than upgrading to upstream master.
 `tests/modules-v1.6.0.txt` records the deployed binary's Go module versions and
 checksums. The image regression rejects dependency drift other than the local
 Souin replacement. No cache configuration changes are made.

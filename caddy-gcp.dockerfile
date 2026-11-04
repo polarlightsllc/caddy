@@ -1,4 +1,4 @@
-FROM caddy:2.11.7-builder-alpine@sha256:95a5e7e2692b5eb9545aadc5b90a39f6f509bee59c9508a493f83ee902eaef63 AS builder
+FROM caddy:2-builder@sha256:d842facfd63b960922e57444ff76fd8f0793a66dfdcf481af8026e1f4e6a39b4 AS builder
 
 # Keep the deployed module versions; patch only Souin's abort propagation.
 RUN go mod download github.com/darkweak/souin@v1.7.9 \
@@ -22,6 +22,6 @@ RUN xcaddy build v2.11.7 \
 
 RUN /usr/bin/caddy list-modules | grep -x 'http.reverse_proxy.selection_policies.spread'
 
-FROM caddy:2.11.7-alpine@sha256:e70b164da81ef698b3ad19af799ea6086ce6d9e48ed4079eb9fe26f6fbf14ee5
+FROM caddy:2-alpine@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f
 
 COPY --from=builder /usr/bin/caddy /usr/bin/caddy
