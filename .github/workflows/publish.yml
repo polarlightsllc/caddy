@@ -65,6 +65,18 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Build test image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./${{ matrix.image.dockerfile }}
+          platforms: ${{ matrix.platform }}
+          load: true
+          tags: caddy-abort-test:local
+
+      - name: Verify abort propagation and healthy caching
+        run: python3 tests/test_abort.py caddy-abort-test:local
+
       - name: Build and push by digest
         id: build
         uses: docker/build-push-action@v6
