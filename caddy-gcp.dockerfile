@@ -15,7 +15,7 @@ RUN xcaddy build v2.11.7 \
     --with github.com/caddy-dns/googleclouddns@v1.1.0 \
     --with github.com/mholt/caddy-ratelimit@v0.1.0 \
     --with github.com/darkweak/storages/badger/caddy@v0.0.20 \
-    --with github.com/techknowlogick/certmagic-s3=github.com/polarlightsllc/certmagic-s3@cdc749729efe345d70a85ce3d4654f2454bda73f \
+    --with github.com/techknowlogick/certmagic-s3=github.com/polarlightsllc/certmagic-s3@8d522017020c0cdd8583dda590f48c18dd040a32 \
     --with github.com/caddyserver/cache-handler@v0.17.0 \
     --with github.com/polarlightsllc/caddy-lb-spread@v0.1.0 \
     --replace github.com/darkweak/souin=/src/souin
