@@ -122,7 +122,7 @@ dep	github.com/spf13/cobra	v1.10.2	h1:DMTTonx5m65Ic0GOoRY2c16WCbHxOOw6xxezuLaBpc
 dep	github.com/spf13/pflag	v1.0.10	h1:4EBh2KAYBwaONj6b2Ye1GiHfwjqyROoF4RwYO+vPwFk=
 dep	github.com/tailscale/tscert	v0.0.0-20251216020129-aea342f6d747	h1:RnBbFMmodYzhC6adOjTbtUQXyzV8dcvKYbolzs6Qch0=
 dep	github.com/techknowlogick/certmagic-s3	v1.5.0
-=>	github.com/polarlightsllc/certmagic-s3	v0.0.0-20260618215011-cdc749729efe	h1:VWF0oaxvZ1MmOAnOlBRgwRm/wuP1CGnHit9330063zc=
+=>	github.com/polarlightsllc/certmagic-s3	v0.0.0-20261116045909-8d522017020c	h1:b8tGu/7OtTrCaoVuzOB52PICbKEi4yuShkrTyv6MrAs=
 dep	github.com/urfave/cli	v1.22.17	h1:SYzXoiPfQjHBbkYxbew5prZHS1TOLT3ierW8SYLqtVQ=
 dep	github.com/x448/float16	v0.8.4	h1:qLwI1I70+NjRFUR3zs1JPUCgaCXSh3SW62uAKT1mSBM=
 dep	github.com/yuin/goldmark	v1.8.6	h1:d0VcaP1sx9GkFVkoW+KtggpGi2KZ965i14b0+bDQST4=

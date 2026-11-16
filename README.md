@@ -7,6 +7,10 @@ existing error channel; only the request goroutine re-panics. An incomplete
 cacheable origin response must not become a successful partial response or a
 cache entry.
 
+The `certmagic-s3` fork is the one plugin bumped since `v1.6.0`: its `List`
+returns loadable keys (storage cleaning no longer logs `unable to load staple
+file`) and the storage logs without its access, secret or encryption keys.
+
 Base images use the exact multi-platform digests recorded in `v1.6.0`'s build
 provenance, preserving its runtime OS layers as well as its compiler. Plugins
 are pinned by version/commit. The current-upstream fix is proposed in
